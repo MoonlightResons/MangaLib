@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.MangalibUser'
 
 # Application definition
 
@@ -38,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #apps
-    "backend_api",
-
     #installed
     "rest_framework",
-    "corsheaders"
+    "rest_framework_simplejwt",
+    "corsheaders",
+
+    #apps
+    "apps.users",
 ]
 
 MIDDLEWARE = [
