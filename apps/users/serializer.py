@@ -1,4 +1,7 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from .models import MangaUser, MangalibUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -14,6 +17,33 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class MangaUserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=MangaUser.objects.all())]
+    )
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        validators=[validate_password]
+    )
+    password2 = serializers.CharField(
+        write_only=True,
+        required=True
+    )
+
     class Meta:
         model = MangaUser
-        fields = "__all__"
+        fields = [
+            'id',
+            'email',
+            'username',
+            'password',
+            'password2',
+        ]
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    mangauser = MangaUser
+    class Meta:
+        model = MangaUser
+        fields = ["username", "avatar", "lvl"]
