@@ -25,4 +25,6 @@ class MangalibUser(AbstractBaseUser, PermissionsMixin):
 
 class MangaUser(MangalibUser):
     avatar = models.ImageField(upload_to='media', blank=True)
+    background = models.ImageField(upload_to='media', blank=True)
     lvl = models.IntegerField(default=0)
+    about = models.TextField(blank=True)

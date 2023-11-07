@@ -43,7 +43,13 @@ class MangaUserSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-    mangauser = MangaUser
+
     class Meta:
         model = MangaUser
-        fields = ["username", "avatar", "lvl"]
+        fields = ['username', 'lvl', 'avatar']
+
+
+class UserProfileUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MangaUser
+        fields = ['username', 'email', 'avatar']
