@@ -4,8 +4,8 @@ from .manager import CustomUserManager
 
 
 class MangalibUser(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField('username', max_length=55, blank=False)
-    email = models.EmailField('email address', unique=True, blank=False)
+    username = models.CharField('username', max_length=55, blank=True)
+    email = models.EmailField('email address', unique=True, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)

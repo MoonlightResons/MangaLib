@@ -1,5 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -16,6 +16,7 @@ class LoginView(TokenObtainPairView):
 
 
 class UserRegisterView(APIView):
+    permission_classes = [permissions.AllowAny]
     def post(self,request):
         serializer = MangaUserSerializer(data=request.data)
         if serializer.is_valid():
@@ -31,7 +32,7 @@ class UserRegisterView(APIView):
 
 
 class AnotherUserProfileView(APIView):
-    permissions = [permissions.AllowAny]
+    permissions_classes = [permissions.IsAuthenticated]
 
     def get(self, request, id):
         profile = get_object_or_404(MangaUser, id=id)
