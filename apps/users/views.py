@@ -41,12 +41,13 @@ class AnotherUserProfileView(APIView):
 
 
 class RequestUserProfileView(APIView):
-    permissions = [UserProfileOwner]
+    permission_classes = [UserProfileOwner]
 
     def get(self, request):
         profile = MangaUser.objects.get(mangalibuser_ptr=request.user)
         serializer = UserProfileSerializer(profile)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def patch(self, request):
         profile = MangaUser.objects.get(mangalibuser_ptr=request.user)
@@ -59,5 +60,5 @@ class RequestUserProfileView(APIView):
     def delete(self, request):
         profile = MangaUser.objects.get(mangalibuser_ptr=request.user)
         profile.delete()
-        return Response(status=status.HTTP_200_OK)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_403_FORBIDDEN)

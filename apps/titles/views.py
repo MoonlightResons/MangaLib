@@ -35,3 +35,5 @@ class MangaDetailView(APIView):
         manga.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+
+#здесь должно быть добавление глав

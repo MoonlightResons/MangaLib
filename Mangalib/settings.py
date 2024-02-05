@@ -70,7 +70,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+
+    'ALLOWED_METHODS': ['GET', 'HEAD', 'OPTIONS', 'DELETE'],
 }
 
 SIMPLE_JWT = {

@@ -2,10 +2,23 @@ from rest_framework import serializers
 from .models import Translators_Team
 
 
+class TeamOwnerNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Translators_Team
+        fields = ('team_owner',)
+
+
 class TeamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Translators_Team
         exclude = ['team_member']
+
+
+class TeamDetailSerializer(serializers.ModelSerializer):
+    # team_owner = TeamOwnerNameSerializer(many=True)
+    class Meta:
+        model = Translators_Team
+        fields = "__all__"
 
 
 class TeamRequestSerializer(serializers.ModelSerializer):

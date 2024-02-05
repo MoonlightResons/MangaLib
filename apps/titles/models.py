@@ -73,7 +73,7 @@ class Manga(models.Model):
     genres = models.ManyToManyField(Genres)
     tags = models.ManyToManyField(Tags)
     release_format = models.ManyToManyField(Format)
-    # translators = models.ForeignKey(Translators_Team, on_delete=models.CASCADE)
+    translators = models.ForeignKey(Translators_Team, on_delete=models.CASCADE, blank=True)
     title_status = models.ForeignKey(Title_status, on_delete=models.CASCADE)
     translate_status = models.ForeignKey(Translate_status, on_delete=models.CASCADE)
     age_content = models.ForeignKey(Age_content, on_delete=models.CASCADE)
@@ -83,3 +83,8 @@ class Manga(models.Model):
 
     def __str__(self):
         return self.english_name
+
+
+class Chapter(models.Model):
+    manga_page = models.FileField(upload_to="chapters")
+    manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
